@@ -1,6 +1,6 @@
 -- run from sys user as sysdba
 DECLARE
-    vsuffix   VARCHAR2 (50) default ('_test');
+    vsuffix   VARCHAR2 (50):='qLTn23sS!';
 
     CURSOR vcrs IS
         SELECT USERNAME
@@ -20,8 +20,8 @@ BEGIN
     FOR rec IN vcrs
     LOOP
         BEGIN
-            DBMS_OUTPUT.put_line ('new password of ' || rec.USERNAME || ' is: ' || lower(rec.USERNAME)||vsuffix);   
-            EXECUTE IMMEDIATE 'alter user '||rec.USERNAME||' identified by '||lower(rec.USERNAME)||vsuffix;
+            DBMS_OUTPUT.put_line ('new password of ' || rec.USERNAME || ' is: ' ||vsuffix);   
+            EXECUTE IMMEDIATE 'alter user '||rec.USERNAME||' identified by "'||vsuffix||'"';
             
         END;
     END LOOP;
